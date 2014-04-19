@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Argosnap::VERSION
   spec.authors       = ["Panagiotis Atmatzidis"]
   spec.email         = ["atma@convalesco.org"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.summary       = %q{Display osx notifications when tarsnap account runs out of picodollars}
+  spec.description   = %q{A ruby script that fetches picdollars amount from the web and displays OSX notifications if the balance of picodollars falls bellow a specific threshold}
   spec.homepage      = ""
   spec.license       = "MIT"
 

@@ -1,17 +1,29 @@
 # Argosnap
 
-This gem displays [OSX notifications](http://support.apple.com/kb/ht5362) when your [tarsnap account](http://www.tarsnap.com/) falls bellow a predifined threshold of [picodollars](http://www.tarsnap.com/picoUSD-why.html).
-With other versions additional functionalities might be added.
+This gem installs a script which displays [OSX notifications](http://support.apple.com/kb/ht5362) when your [tarsnap account](http://www.tarsnap.com/) falls bellow a predefined threshold of [picodollars](http://www.tarsnap.com/picoUSD-why.html).
 
 ## Installation
 
-First thing to do, would be install the gem via rubygems:
+Install the gem via rubygems:
 
     $ gem install argosnap
 
-This will install the gem along with it's dependencies. 
+## Configure
+
+We need to run `install` for the script to create the configuration file. 
+
 
     $ asnap install
+
+Then we configure the `config.yml` file which looks like this:
+    
+    ---
+    :email: sample@email.com
+    :password: p4sw0rd3
+    :threshold: 10
+    :seconds: 7200
+
+These are the default values. Tarsnap email login and password. The `threshold` variables defines the amount of picodollars CONTINUE-HERE
 
 ## Usage
 
