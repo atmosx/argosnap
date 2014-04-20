@@ -8,36 +8,54 @@ opt_parser = OptionParser.new do |opt|
   opt.banner = "argosnap #{Argosnap::VERSION} ( http://github/atmosx/argosnap )\nUsage: argosnap [OPTIONS]"
   opt.separator  ""
   opt.separator  "     version: dislay version"
-  opt.separator  "     install: install necessary files"
-  opt.separator  "     run: check tarsnap account"
+  opt.separator  "     install: [cron, config]"
+  opt.separator  "     print: [osx]"
   opt.separator  ""
 
-  opt.on("-v","--version","version control") do |version|
+  opt.on("-v","--version","display version") do |version|
     options[:version] = version
   end
 
-  opt.on("-i","--install","install configuration files") do |install|
-    options[:install] = install
-  end
-  
-  opt.on("-r","--run","executes 'argosnap' and displayes notifications") do |run|
-    options[:run] = run
+  opt.on("-i","--install [OPTION]", "install configuration files") do |install|
+    options[:install] = install || config
   end
 
-  opt.on("-h","--help","help") do
+  opt.on("-p","--print [OPTION]","fetch current amount in picodollars") do |print|
+    options[:print] = print || default
+  end
+
+  opt.on("-h","--help","help") do |h|
+    options[:help] = h
     puts opt_parser
   end
 end
 
-opt_parser.parse!
-
-case ARGV[0]
-when "version"
-  puts Argosnap::VERSION
-when "install"
-  Argosnap::Action.new.install
-when "run"
-  Argosnap::Argos.new.balance
-else
+# Execution flow
+begin
+  opt_parser.parse!
+  if options[:version]
+    puts Argosnap::VERSION
+  elsif options[:install]
+    if options[:install] == 'config'
+      Argosnap::Install.new.config
+    elsif options[:install] == 'cron'
+      Argosnap::OSXNotifications.new.install_launchd_script
+    elsif options[:help]
+      # do nothing - avoids double printing of 'opt_parser'
+    end
+  elsif options[:print]
+    if options[:print] == 'osx'
+      Argosnap::OSXNotifications.new.display
+    elsif options[:print] == 'default'
+      b = Argosnap::Fetch.new.balance
+      puts "Current balance (picodollars): #{b}"
+    else
+      puts "Option not recognized"
+    end
+  else
     puts opt_parser
+  end
+rescue OptionParser::InvalidOption => e
+  puts "No such option! Type 'argosnap -h' for help!"
+  exit
 end
