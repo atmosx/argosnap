@@ -1,6 +1,6 @@
 # Argosnap
 
-This gem installs a script which displays [OSX notifications](http://support.apple.com/kb/ht5362) when your [tarsnap account](http://www.tarsnap.com/) falls bellow a predefined threshold of [picodollars](http://www.tarsnap.com/picoUSD-why.html).
+This gem installs a script which displays [OSX notifications](http://support.apple.com/kb/ht5362)  when your [tarsnap account](http://www.tarsnap.com/) falls bellow a predefined threshold of [picodollars](http://www.tarsnap.com/picoUSD-why.html).
 
 ## Installation
 

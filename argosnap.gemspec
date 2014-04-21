@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Panagiotis Atmatzidis"]
   spec.email         = ["atma@convalesco.org"]
   spec.summary       = %q{Display osx notifications when tarsnap account runs out of picodollars}
-  spec.description   = %q{A ruby script that fetches picdollars amount from the web and displays OSX notifications if the balance of picodollars falls bellow a specific threshold}
+  spec.description   = %q{A ruby script displays OSX notifications with current ballance. If the balance of picodollars falls bellow a specific threshold}
   spec.homepage      = ""
   spec.license       = "MIT"
 
