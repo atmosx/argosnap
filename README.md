@@ -6,7 +6,7 @@ This gem allows you to displays your current amount of picodollars along with [O
 
 Install the gem via rubygems:
 
-    $ gem install argosnap plist mechanize
+    $ gem install argosnap plist mechanize terminal-notifier
 
 ## Configure
 
