@@ -1,6 +1,6 @@
 # Argosnap
 
-This gem installs a script which displays [OSX notifications](http://support.apple.com/kb/ht5362)  when your [tarsnap account](http://www.tarsnap.com/) falls bellow a predefined threshold of [picodollars](http://www.tarsnap.com/picoUSD-why.html).
+This gem allows you to displays your current amount of picodollars along with [OSX notifications](http://support.apple.com/kb/ht5362)  when your [tarsnap account](http://www.tarsnap.com/) falls bellow a predefined threshold of [picodollars](http://www.tarsnap.com/picoUSD-why.html).
 
 ## Installation
 
@@ -10,10 +10,9 @@ Install the gem via rubygems:
 
 ## Configure
 
-We need to run `install` for the script to create the configuration file. 
+Run `install` for the script to create the configuration file like: 
 
-
-    $ asnap install
+    $ argosnap install
 
 Then we configure the `config.yml` file which looks like this:
     
@@ -23,15 +22,36 @@ Then we configure the `config.yml` file which looks like this:
     :threshold: 10
     :seconds: 7200
 
-These are the default values. Tarsnap email login and password. The `threshold` variables defines the amount of picodollars CONTINUE-HERE
+Just put your tarsnap login credentials. You can omit the other two variables if you are not using an OSX system. To view your account use the command:
 
-## Usage
+    $ argosnap -p
 
-TODO: Write usage instructions here
+
+## Configure Launchd under MacOSX
+
+In the `config.yml` adjust the `threshold` and `seconds` options as you see fit. Threshold is the amount of *picodollars* bellow which you'd like to start seeing notifications and the `seconds` consists of the time window. Then type:
+
+    $ argosnap install cron
+
+Now just start the installed `.plist` file and you're done.
+
+## Options
+
+To run an osx notification use the command:
+
+  $ argosnap -p osx
+  Current balance (picodollars): 4.8812
+
+To get the amount of picodollars as an integer type:
+
+  $ argosnap -p clean
+  4.8812
+
+That's all :-)
 
 ## Contributing
 
-1. Fork it ( http://github.com/<my-github-username>/argosnap/fork )
+1. Fork it ( http://github.com/atmosx/argosnap/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)

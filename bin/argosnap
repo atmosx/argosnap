@@ -8,8 +8,11 @@ opt_parser = OptionParser.new do |opt|
   opt.banner = "argosnap #{Argosnap::VERSION} ( http://github/atmosx/argosnap )\nUsage: argosnap [OPTIONS]"
   opt.separator  ""
   opt.separator  "     version: dislay version"
-  opt.separator  "     install: [cron, config]"
-  opt.separator  "     print: [osx]"
+  opt.separator  "     install [config]: installs configure file 'config.yml'"
+  opt.separator  "     install [cron]: installs Launchd script under OSX"
+  opt.separator  "     print: prints the output in picodollars"
+  opt.separator  "     print [osx]: print osx notification"
+  opt.separator  "     print [clean]: prints only the picollars (float rounded in 4 decimals), to use in cli"
   opt.separator  ""
 
   opt.on("-v","--version","display version") do |version|
@@ -17,11 +20,11 @@ opt_parser = OptionParser.new do |opt|
   end
 
   opt.on("-i","--install [OPTION]", "install configuration files") do |install|
-    options[:install] = install || config
+    options[:install] = install || 'config'
   end
 
   opt.on("-p","--print [OPTION]","fetch current amount in picodollars") do |print|
-    options[:print] = print || default
+    options[:print] = print || 'default'
   end
 
   opt.on("-h","--help","help") do |h|
@@ -40,15 +43,18 @@ begin
       Argosnap::Install.new.config
     elsif options[:install] == 'cron'
       Argosnap::OSXNotifications.new.install_launchd_script
-    elsif options[:help]
-      # do nothing - avoids double printing of 'opt_parser'
     end
+  elsif options[:help]
+    # do nothing - avoids double printing of 'opt_parser'
   elsif options[:print]
     if options[:print] == 'osx'
       Argosnap::OSXNotifications.new.display
     elsif options[:print] == 'default'
       b = Argosnap::Fetch.new.balance
       puts "Current balance (picodollars): #{b}"
+    elsif options[:print] == 'clean'
+      b = Argosnap::Fetch.new.balance
+      puts b
     else
       puts "Option not recognized"
     end
