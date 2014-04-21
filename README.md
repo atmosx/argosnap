@@ -12,7 +12,7 @@ Install the gem via rubygems:
 
 Run `install` for the script to create the configuration file like: 
 
-    $ argosnap install
+    $ argosnap -i config
 
 Then we configure the `config.yml` file which looks like this:
     
@@ -31,7 +31,7 @@ Just put your tarsnap login credentials. You can omit the other two variables if
 
 In the `config.yml` adjust the `threshold` and `seconds` options as you see fit. Threshold is the amount of *picodollars* bellow which you'd like to start seeing notifications and the `seconds` consists of the time window. Then type:
 
-    $ argosnap install cron
+    $ argosnap -i cron
 
 Now just start the installed `.plist` file and you're done.
 
