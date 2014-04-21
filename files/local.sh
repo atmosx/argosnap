@@ -11,7 +11,5 @@ else
 	printf "ERROR: An RVM installation was not found.\n"
 fi
 
-local=`pwd`
-
-# Executables
-$local/../bin/argosnap -p osx
+# Executable now should be in path
+argosnap -p osx
