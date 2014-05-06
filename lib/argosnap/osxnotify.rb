@@ -20,7 +20,7 @@ module Argosnap
 
     # Creates launchd script with user's variables
     def install_launchd_script 
-      raise ArgumentError.new("Please make sure you run 'asnap install' in order to install configuration files, before running asnap!") unless File.exists?("#{Dir.home}/.argosnap/config.yml")
+      raise ArgumentError.new("Please make sure you run 'argosnap install' in order to install configuration files, before running asnap!") unless File.exists?("#{Dir.home}/.argosnap/config.yml")
       user = ENV['USER']
       c = "#{Dir.home}/.argosnap/config.yml"
       begin

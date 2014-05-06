@@ -8,7 +8,7 @@ module Argosnap
     def initialize         
       begin
         user = ENV['USER']
-        raise ArgumentError.new("Please make sure you run 'asnap install' in order to install configuration files, before running asnap!") unless File.exists?("#{Dir.home}/.argosnap/config.yml")
+        raise ArgumentError.new("Please make sure you run 'argosnap install' in order to install configuration files, before running asnap!") unless File.exists?("#{Dir.home}/.argosnap/config.yml")
         r = YAML::load_file("#{Dir.home}/.argosnap/config.yml")
         logfile = "#{Dir.home}/.argosnap/argosnap.log"
         @email, @password, @threshold, @logger, @agent = r[:email], r[:password], r[:threshold], Logger.new(logfile), Mechanize.new
