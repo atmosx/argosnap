@@ -7,12 +7,12 @@ options = {}
 opt_parser = OptionParser.new do |opt|
   opt.banner = "argosnap #{Argosnap::VERSION} ( https://github.com/atmosx/argosnap/ )\nUsage: argosnap [OPTIONS]"
   opt.separator  ""
-  opt.separator  "     version: dislay version"
-  opt.separator  "     install [config]: installs configure file 'config.yml'"
-  opt.separator  "     install [cron]: installs Launchd script under OSX"
-  opt.separator  "     print: prints the output in picodollars"
-  opt.separator  "     print [osx]: print osx notification"
-  opt.separator  "     print [clean]: prints only the picollars (float rounded in 4 decimals), to use in cli"
+  opt.separator  "     -v:        dislay version"
+  opt.separator  "     -i config: install configuration files"
+  opt.separator  "     -i cron:   installs Launchd script under OSX"
+  opt.separator  "     -p:        prints the current amount in picodollars"
+  opt.separator  "     -p osx:    prints desktop osx notification"
+  opt.separator  "     -p clean:  prints only the picollars (float rounded in 4 decimals), to use in cli"
   opt.separator  ""
 
   opt.on("-v","--version","display version") do |version|
