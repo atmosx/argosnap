@@ -39,13 +39,13 @@ Now just start the installed `.plist` file and you're done.
 
 To run an osx notification use the command:
 
-  $ argosnap -p osx
-  Current balance (picodollars): 4.8812
+    $ argosnap -p osx
+    Current balance (picodollars): 4.8812
 
 To get the amount of picodollars as an integer type:
 
-  $ argosnap -p clean
-  4.8812
+    $ argosnap -p clean
+    4.8812
 
 That's all :-)
 
