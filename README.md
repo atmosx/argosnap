@@ -10,11 +10,11 @@ Install the gem via rubygems:
 
 ## Configure
 
-Run `install` for the script to create the configuration file like: 
+Run the following command for the script to create a configuration file like: 
 
     $ argosnap -i config
 
-Then we configure the `config.yml` file which looks like this:
+You'll see the location of the newly created configuration file on your terminal. Then you need to configure the `config.yml` file which looks like this:
     
     ---
     :email: sample@email.com
@@ -33,7 +33,7 @@ In the `config.yml` adjust the `threshold` and `seconds` options as you see fit.
 
     $ argosnap -i cron
 
-Now just start the installed `.plist` file and you're done.
+Now just start the installed `.plist` file following instruction you'll see on the screen and you're done.
 
 ## Options
 
