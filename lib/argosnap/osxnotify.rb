@@ -45,9 +45,14 @@ module Argosnap
       end
     end
 
-    # Display notifications
-    def display
+    # Display notification if threshold is surpassed
+    def display_check
       TerminalNotifier.notify("Current balance: #{@picodollars}", :title => 'TarSnap', :subtitle => 'balance running out') if @picodollars < @threshold.to_i
+    end
+
+    # Display current ballance in OSX style notifications
+    def display
+      TerminalNotifier.notify("Current balance: #{@picodollars}", :title => 'TarSnap', :subtitle => 'balance running out') 
     end
   end
 end

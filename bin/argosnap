@@ -45,10 +45,12 @@ begin
       Argosnap::OSXNotifications.new.install_launchd_script
     end
   elsif options[:help]
-    # do nothing - avoids double printing of 'opt_parser'
+    # avoids double printing of 'opt_parser'
   elsif options[:print]
     if options[:print] == 'osx'
       Argosnap::OSXNotifications.new.display
+    elsif options[:print] == 'osx_check'
+      Argosnap::OSXNotifications.new.display_check
     elsif options[:print] == 'default'
       b = Argosnap::Fetch.new.balance
       puts "Current balance (picodollars): #{b}"
