@@ -3,7 +3,7 @@ require 'mechanize'
 require 'logger'
 
 module Argosnap
-  # Given a username and a password, fetch balance from http://www.tarsnap.com
+  # Given a username and a password, fetch balance from https://www.tarsnap.com
   class Fetch
     def initialize         
       begin
