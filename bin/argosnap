@@ -63,7 +63,7 @@ begin
   else
     puts opt_parser
   end
-rescue OptionParser::InvalidOption => e
+rescue OptionParser::InvalidOption 
   puts "No such option! Type 'argosnap -h' for help!"
   exit
 end

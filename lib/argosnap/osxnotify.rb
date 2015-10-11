@@ -1,12 +1,15 @@
 require 'terminal-notifier'
 require_relative File.expand_path('../balance', __FILE__)
 require 'yaml'
+require 'plist'
 
 module Argosnap
+
+  # Display notifications under OSX
+  # We're using TerminalNotifier
   class OSXNotifications
     def initialize
       begin
-        user = ENV['USER']
         raise ArgumentError.new("This command is made for Darwin! Please check the website for details #{url} !") unless Gem::Platform.local.os == 'darwin'
         r = YAML::load_file("#{Dir.home}/.argosnap/config.yml")
         logfile = "#{Dir.home}/.argosnap/argosnap.log"
@@ -22,7 +25,6 @@ module Argosnap
     def install_launchd_script 
       raise ArgumentError.new("Please make sure you run 'argosnap install' in order to install configuration files, before running asnap!") unless File.exists?("#{Dir.home}/.argosnap/config.yml")
       user = ENV['USER']
-      c = "#{Dir.home}/.argosnap/config.yml"
       begin
         launch_agents = "/Users/#{user}/Library/LaunchAgents/"
         # start_script loads the RVM environment.
@@ -41,7 +43,6 @@ module Argosnap
         end
       rescue Exception => e
         puts e.message
-        # puts e.backtrace
       end
     end
 

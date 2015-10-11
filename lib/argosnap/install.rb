@@ -1,6 +1,5 @@
 require 'logger'
 require 'yaml'
-require 'plist'
 
 module Argosnap
   class Install
