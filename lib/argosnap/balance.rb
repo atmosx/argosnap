@@ -5,32 +5,52 @@ require 'logger'
 module Argosnap
   # Given a username and a password, fetch balance from https://www.tarsnap.com
   class Fetch
+    attr_reader :email, :password, :logger, :agent
     def initialize         
       begin
-        raise ArgumentError.new("Please make sure you run 'argosnap install', before running argosnap!") unless File.exists?("#{Dir.home}/.argosnap/config.yml")
-        r = YAML::load_file("#{Dir.home}/.argosnap/config.yml")
+
+        config  = "#{Dir.home}/.argosnap/config.yml"
         logfile = "#{Dir.home}/.argosnap/argosnap.log"
-        @email, @password, @threshold, @logger, @agent = r[:email], r[:password], r[:threshold], Logger.new(logfile), Mechanize.new
+        data    = YAML::load_file(config)
+
+        @email     = data[:email]
+        @password  = data[:password] 
+        @logger    = Logger.new(logfile) 
+        @agent     = Mechanize.new
+
       rescue ArgumentError => e
         puts e.message
         exit
       end
     end
 
-    # Fetch balance from tarsnap using mechanize
+    # Elementary configuration file check
+    def check_configuration
+      Argosnap::Install.new.ensure_compatibility
+      if email.empty?
+        puts "Please add your tarsnap email to #{config}"
+      elsif password.empty?
+        puts "Please add your tarsnap password to #{config}"
+      else 
+        true
+      end
+    end
+
+    # Fetch balance from tarsnap using
     def balance
+      check_configuration
       begin
-        page = @agent.get('https://www.tarsnap.com/account.html')
-        form = page.form_with(:action => 'https://www.tarsnap.com/manage.cgi')
-        form.address = @email
-        form.password = @password
-        panel = @agent.submit(form)
-        picodollars = panel.parser.to_s.scan(/\$\d+\.\d+/)[0].scan(/\d+\.\d+/)[0].to_f.round(4) 
-        @logger.info "Execution ended successfully! Picodollars: #{picodollars}" 
+        page          = agent.get('https://www.tarsnap.com/account.html')
+        form          = page.form_with(:action => 'https://www.tarsnap.com/manage.cgi')
+        form.address  = email
+        form.password = password
+        panel         = agent.submit(form)
+        picodollars   = panel.parser.to_s.scan(/\$\d+\.\d+/)[0].scan(/\d+\.\d+/)[0].to_f.round(4) 
+        logger.info   "Execution ended successfully! Picodollars: #{picodollars}" 
         picodollars
       rescue Exception => e
-        @logger.error "A problem with tarsnap notification occured:"
-        @logger.error "#{e}"
+        logger.error  "A problem with tarsnap notification occured:"
+        logger.error  "#{e}"
       end
     end
   end

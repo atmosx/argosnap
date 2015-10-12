@@ -1,20 +1,25 @@
 require_relative File.expand_path('../balance', __FILE__)
 
-# OSX specific
+# OSX specific libraries
 require 'terminal-notifier'
 require 'plist'
 
 module Argosnap
 
   # Display notifications under OSX
-  # We're using TerminalNotifier
   class OSXNotifications
+    attr_reader :logger, :picodollars, :time_interval
     def initialize
       begin
-        raise ArgumentError.new("This command is made for Darwin! Please check the website for details #{url} !") unless Gem::Platform.local.os == 'darwin'
-        r = YAML::load_file("#{Dir.home}/.argosnap/config.yml")
+
+        config = "#{Dir.home}/.argosnap/config.yml"
         logfile = "#{Dir.home}/.argosnap/argosnap.log"
-        @threshold, @logger, @picodollars, @time_interval = r[:threshold], Logger.new(logfile), Argosnap::Fetch.new.balance, r[:seconds]
+        data = YAML::load_file(config)
+
+        @logger        = Logger.new(logfile), 
+        @picodollars   = Argosnap::Fetch.new.balance, 
+        @threshold     = data[:threshold], 
+        @time_interval = data[:time_interval]
       rescue ArgumentError => e
         puts e.message
         # puts e.backtrace
