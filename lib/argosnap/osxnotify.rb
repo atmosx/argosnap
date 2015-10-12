@@ -1,6 +1,7 @@
-require 'terminal-notifier'
 require_relative File.expand_path('../balance', __FILE__)
-require 'yaml'
+
+# OSX specific
+require 'terminal-notifier'
 require 'plist'
 
 module Argosnap
