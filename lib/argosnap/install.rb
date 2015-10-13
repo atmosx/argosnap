@@ -53,10 +53,10 @@ module Argosnap
       # Check the operating system. Windows is not supported at this time.
       if %w{ darwin linux freebsd openbsd netbsd }.include? Gem::Platform.local.os 
         Kernel.abort("Please make sure you run 'argosnap install', before running argosnap!") unless File.exists?(config)
+      else
+        Kernel.abort "This gem is made for UNIX! Please check the website for details #{url} !"
       end
-    else
-      Kernel.abort "This gem is made for UNIX! Please check the website for details #{url} !"
     end
-  end
 
+  end
 end
