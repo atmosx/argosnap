@@ -15,7 +15,7 @@ module Argosnap
 
         @email     = data[:email]
         @password  = data[:password] 
-        @logger    = Logger.new(logfile) 
+        @logger    = Logger.new(logfile, 10, 1024000)
         @agent     = Mechanize.new
 
       rescue ArgumentError => e
