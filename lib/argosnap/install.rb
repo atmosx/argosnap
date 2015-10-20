@@ -22,19 +22,25 @@ module Argosnap
           puts "Please remove config: #{config} if you want to re-installing" 
         else
           Dir.mkdir(File.join(Dir.home, ".argosnap"), 0700) unless Dir.exists?(config)
-          config = {email: 'tarsnap_email', 
-                    password: 'tarsnap_password', 
-                    threshold: 10, 
-                    seconds: 7200, 
-                    smtp: {
-                      email_notifications: false, 
-                      email_delivery_method: 'smtp', 
-                      smtpd_address: "gmail.google.com", 
-                      smtpd_port: 587, 
-                      smtpd_from: 'user@host.domain.com', 
-                      smtpd_to: 'your@email.com', 
-                      format: 'txt'}
+          config = {
+            email: 'tarsnap_email', 
+            password: 'tarsnap_password', 
+            threshold: 10, 
+            seconds: 86400,
+            notifications_email: false,
+            smtp: {
+              email_delivery_method: 'smtp', 
+              smtpd_address: "gmail.google.com", 
+              smtpd_port: 587, 
+              smtpd_from: 'user@host.domain.com', 
+              smtpd_to: 'your@email.com', 
+              format: 'txt'},
+            notifications_pushover: false,
+            pushover: {
+              key: 'user_key',
+              token: 'app_token'}
           }
+
           File.open(config, "w") {|f| f.write(config.to_yaml)}
           puts "1. Edit the configuration file: #{config}"
           puts "2. Launch argosnap by typing in the terminal: argosnap -p"
