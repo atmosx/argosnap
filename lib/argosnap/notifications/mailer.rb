@@ -1,4 +1,4 @@
-require_relative File.expand_path('../balance', __FILE__)
+require_relative File.expand_path('../../balance', __FILE__)
 
 require 'mail'
 require 'socket'
@@ -8,11 +8,8 @@ module Argosnap
   class Mailer
     # set getters
     attr_reader :logger, :smtpd_address, :smtpd_port, :smtpd_from, :smtpd_to, :method, :format
-    def initialize
-      config               = YAML::load_file("#{Dir.home}/.argosnap/config.yml")
-      logfile              = "#{Dir.home}/.argosnap/argosnap.log"
-
-      @logger              = Logger.new(logfile)
+    def initialize(config, logger)
+      @logger              = logger
       @smtpd_address       = config[:smtp][:smtpd_address]
       @smtpd_port          = config[:smtp][:smtpd_port]
       @smtpd_from          = config[:smtp][:smtpd_from]
@@ -39,34 +36,29 @@ module Argosnap
       # ensure compatibility first
       Argosnap::Install.new.ensure_compatibility
       ensure_mail_configuration
-      if email_notifications
-        # create the 'mail' object
-        mail           = Mail.new
+      # create the 'mail' object
+      mail           = Mail.new
 
-        # configure mail options
-        mail[:from]    =  smtpd_from
-        mail[:to]      =  smtpd_to
-        mail[:subject] = "ARGOSNAP: Your tarsnap account is running out of picodollars!"
+      # configure mail options
+      mail[:from]    =  smtpd_from
+      mail[:to]      =  smtpd_to
+      mail[:subject] = "ARGOSNAP: Your tarsnap account is running out of picodollars!"
 
-        # configure mail format
-        if format == 'txt'
-          mail[:body] =  File.read(File.expand_path('../../../files/mail.body.txt', __FILE__))
-        else
-          mail['content-type'] = 'text/html; charset=UTF-8'
-          mail[:body] = Haml::Engine.new(File.read(File.expand_path('../../../files/mail.body.haml', __FILE__))).render
-        end
-
-        # SMTPd configuration. Defaults to local 'sendmail'
-        if method == 'smtp'
-          mail.delivery_method :smtp, address: smtpd_address, port: smtpd_port
-        end
-
-        # dispatch email
-        mail.deliver
+      # configure mail format
+      if format == 'txt'
+        mail[:body] =  File.read(File.expand_path('../../../files/mail.body.txt', __FILE__))
       else
-        logger.info("Email notifications are disasbled. Please check your config: #{config}")
-        puts "Email notifications are disasbled. Please check your config: #{config}"
+        mail['content-type'] = 'text/html; charset=UTF-8'
+        mail[:body] = Haml::Engine.new(File.read(File.expand_path('../../../files/mail.body.haml', __FILE__))).render
       end
+
+      # SMTPd configuration. Defaults to local 'sendmail'
+      if method == 'smtp'
+        mail.delivery_method :smtp, address: smtpd_address, port: smtpd_port
+      end
+
+      # dispatch email
+      mail.deliver
     end
 
   end

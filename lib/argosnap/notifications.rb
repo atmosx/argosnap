@@ -10,19 +10,25 @@ module Argosnap
   class Notifications
     attr_reader :config, :logger
     def initialize(config, logger)
-      config  = "#{Dir.home}/.argosnap/config.yml"
+      config  = YAML::load_file("#{Dir.home}/.argosnap/config.yml")
       logfile = "#{Dir.home}/.argosnap/argosnap.log"
-      data    = YAML::load_file(config)
-
       @logger        = Logger.new(logfile, 10, 1024000)
-      @threshold     = data[:threshold]
+      @threshold     = config[:threshold]
+    end
+
+    def gem_available?(name)
+         Gem::Specification.find_by_name(name)
+    rescue Gem::LoadError
+         false
+    rescue
+         Gem.available?(name)
     end
 
     def send
-      Argosnap::Mailer.new.send if data[:notifications_email]
+      Argosnap::Mailer.new(config, logger).send if (data[:notifications_email] && gem_available?('mail'))
       if data[:notifications_pushover]
-        key = data[:pushover][:key]
-        token  = data[:pushover][:token]
+        key     = config[:pushover][:key]
+        token   = config[:pushover][:token]
         message = "Your tarsnap account is running out of picodollars! Your current amount is #{Argosnap::Fetch.new.balance} picoUSD"
         Pushover.send(token, key, message, logger)
       end

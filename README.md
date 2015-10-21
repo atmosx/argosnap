@@ -2,13 +2,13 @@
 
 This gem allows you to displays your current amount of picodollars along with [OSX notifications](http://support.apple.com/kb/ht5362)  when your [tarsnap account](http://www.tarsnap.com/) falls bellow a predefined threshold of [picodollars](http://www.tarsnap.com/picoUSD-why.html).
 
-## Installation
+# Installation
 
 Install the gem via rubygems:
 
     $ gem install argosnap plist mechanize terminal-notifier
 
-## Configure
+# Configure
 
 Run the following command for the script to create a configuration file like: 
 
@@ -27,7 +27,7 @@ Just put your tarsnap login credentials. You can omit the other two variables if
     $ argosnap -p
 
 
-## Configure Launchd under MacOSX
+# Configure Launchd under MacOSX
 
 In the `config.yml` adjust the `threshold` and `seconds` options as you see fit. Threshold is the amount of *picodollars* bellow which you'd like to start seeing notifications and the `seconds` consists of the time window. Then type:
 
@@ -35,7 +35,7 @@ In the `config.yml` adjust the `threshold` and `seconds` options as you see fit.
 
 Now just start the installed `.plist` file following instruction you'll see on the screen and you're done.
 
-## Options
+# Options
 
 To run an osx notification use the command:
 
@@ -49,7 +49,7 @@ To get the amount of picodollars as an integer type:
 
 That's all :-)
 
-## Contributing
+# Contributing
 
 1. Fork it ( http://github.com/atmosx/argosnap/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)

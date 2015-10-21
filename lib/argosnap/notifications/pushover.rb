@@ -1,6 +1,8 @@
 require "net/https"
 
 module Pushover
+
+
   def self.send(token, user, message, log)
     begin
       sleep(5)

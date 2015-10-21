@@ -1,27 +1,26 @@
-require 'logger'
+require 'fileutils'
 require 'yaml'
 
 module Argosnap
 
   class Install
 
-    attr_reader :home, :config, :url
-    def initialize
-      @config = "#{Dir.home}/.argosnap/config.yml"
-      @home   = "#{Dir.home}/.argosnap"
-      @url    = 'http://atmosx.github.com/argosnap'
+    # Load onfiguration files
+    def files
+      Configuration.new.files
     end
 
     # Install configuration files in the system
-    def config
+    def install
       ensure_compatibility
       begin
         # permissions are a-rwx, u+rwx
-        if File.exist?(config)
+        if File.exists? files[:config]
           puts "Config file exists!"
-          puts "Please remove config: #{config} if you want to re-installing" 
+          puts "Please remove config: #{config} manually and re-install the configuration file." 
         else
-          Dir.mkdir(File.join(Dir.home, ".argosnap"), 0700) unless Dir.exists?(config)
+          Dir.mkdir(File.join(Dir.home, ".argosnap"), 0700) unless File.exist? files[:home]
+          FileUtils.touch(files[:logfile]) unless File.exist? files[:logfile]
           config = {
             email: 'tarsnap_email', 
             password: 'tarsnap_password', 
@@ -40,29 +39,36 @@ module Argosnap
               key: 'user_key',
               token: 'app_token'}
           }
+          File.open(files[:config], "w") {|f| f.write(config.to_yaml)}
 
-          File.open(config, "w") {|f| f.write(config.to_yaml)}
-          puts "1. Edit the configuration file: #{config}"
-          puts "2. Launch argosnap by typing in the terminal: argosnap -p"
+          puts ""
+          puts "Configuration file created! To setup argosnap: "
+          puts "1. Edit the configuration file: #{files[:config]}"
+          puts "2. Run argosnap by typing in the terminal 'argosnap -p' to fetch current balance"
+          puts "3. To configure notifications see: <link>"
+          puts ""
+
         end
-      rescue Exception => e
-        puts "You found a bug!"
-        puts "Please open a ticket at https://github.com/atmosx/argosnap/issues" 
-        puts "Give details like: what command you issued, OS version, argosnap version and ruby version. Include the following message:"
+      rescue Errno::ENOENT => e
+        puts "Can't locate file!"
         puts e.message
         puts e.backtrace
       end
     end
 
+    def cron_entry
+      puts "\nA standard cron entry looks like this:\n"
+      puts "\n5 8 * * 6 <user> <command>\n"
+      puts "\nFor detailed instructions see here: <wiki-link>"
+      puts ""
+    end
+
     # Check OS support and configuration file
     def ensure_compatibility
       # Check the operating system. Windows is not supported at this time.
-      if %w{ darwin linux freebsd openbsd netbsd }.include? Gem::Platform.local.os 
-        Kernel.abort("Please make sure you run 'argosnap install', before running argosnap!") unless File.exists?(config)
-      else
+      unless %w{ darwin linux freebsd openbsd netbsd }.include? Gem::Platform.local.os 
         Kernel.abort "This gem is made for UNIX! Please check the website for details #{url} !"
       end
     end
-
   end
 end
