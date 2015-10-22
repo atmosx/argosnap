@@ -1,10 +1,8 @@
-require "net/https"
-
+# pushover.net module
 module Pushover
-
-
   def self.send(token, user, message, log)
     begin
+      # be nice to Pushover API
       sleep(5)
       url = URI.parse("https://api.pushover.net/1/messages.json")
       req = Net::HTTP::Post.new(url.path)

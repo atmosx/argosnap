@@ -1,4 +1,5 @@
 require 'yaml'
+require 'logger'
 
 module Argosnap
   class Configuration
@@ -19,6 +20,21 @@ module Argosnap
     # Config data in hash 
     def data
       YAML::load_file(files[:config])
+    end
+
+    # Check if gem is available
+    def gem_available?(name)
+         Gem::Specification.find_by_name(name)
+    rescue Gem::LoadError
+         false
+    rescue
+         Gem.available?(name)
+    end
+
+    # Log and Abort!
+    def log_and_abort(msg)
+      logger.error(msg)
+      Kernel.abort(msg)
     end
   end
 end

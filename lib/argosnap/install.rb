@@ -1,31 +1,26 @@
 require 'fileutils'
-require 'yaml'
 
 module Argosnap
 
   class Install
-
-    # Load onfiguration files
-    def files
-      Configuration.new.files
-    end
 
     # Install configuration files in the system
     def install
       ensure_compatibility
       begin
         # permissions are a-rwx, u+rwx
-        if File.exists? files[:config]
+        if File.exists? config.files[:config]
           puts "Config file exists!"
-          puts "Please remove config: #{config} manually and re-install the configuration file." 
+          puts "Please remove config: #{config.files[:config]} manually and re-install the configuration file." 
         else
-          Dir.mkdir(File.join(Dir.home, ".argosnap"), 0700) unless File.exist? files[:home]
-          FileUtils.touch(files[:logfile]) unless File.exist? files[:logfile]
+          Dir.mkdir(File.join(Dir.home, ".argosnap"), 0700) unless File.exist? config.files[:home]
+          FileUtils.touch(config.files[:logfile]) unless File.exist? config.files[:logfile]
           config = {
             email: 'tarsnap_email', 
             password: 'tarsnap_password', 
             threshold: 10, 
             seconds: 86400,
+            notifications_osx: false,
             notifications_email: false,
             smtp: {
               email_delivery_method: 'smtp', 
@@ -39,11 +34,11 @@ module Argosnap
               key: 'user_key',
               token: 'app_token'}
           }
-          File.open(files[:config], "w") {|f| f.write(config.to_yaml)}
+          File.open(config.files[:config], "w") {|f| f.write(config.to_yaml)}
 
           puts ""
           puts "Configuration file created! To setup argosnap: "
-          puts "1. Edit the configuration file: #{files[:config]}"
+          puts "1. Edit the configuration file: #{config.files[:config]}"
           puts "2. Run argosnap by typing in the terminal 'argosnap -p' to fetch current balance"
           puts "3. To configure notifications see: <link>"
           puts ""
@@ -67,8 +62,31 @@ module Argosnap
     def ensure_compatibility
       # Check the operating system. Windows is not supported at this time.
       unless %w{ darwin linux freebsd openbsd netbsd }.include? Gem::Platform.local.os 
-        Kernel.abort "This gem is made for UNIX! Please check the website for details #{url} !"
+        config.log_and_abort("This gem is made for UNIX! Please check the website for details #{url} !")
       end
     end
+
+    def ensure_installation
+      if File.exist?(config.files[:home])
+        if (File.exist?(config.files[:logfile]) && File.exist?(config.files[:config]))
+          true
+        else
+          puts ""
+          Kernel.abort("No configuration files found! Please run 'argosnap -i config'\n")
+        end
+      else
+        puts ""
+        Kernel.abort("No configuration directory found! Please run 'argosnap -i config'\n")
+      end
+    end
+
+    # private methods
+    private
+
+    # Load onfiguration files
+    def config
+      Configuration.new
+    end
+
   end
 end

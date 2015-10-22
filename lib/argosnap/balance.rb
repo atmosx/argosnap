@@ -1,52 +1,48 @@
 require 'mechanize'
-require 'logger'
 
 module Argosnap
   # Given a username and a password, fetch balance from https://www.tarsnap.com
   class Fetch
 
-    # load configuration files
-    def config 
-      Configuration.new
-    end
-
-    attr_reader :email, :password, :logger, :agent
-    def initialize         
-        @email     = config.data[:email]
-        @password  = config.data[:password] 
-        @logger    = config.logger
-        @agent     = Mechanize.new
-    end
-
     # Elementary configuration file check
     def check_configuration
       Install.new.ensure_compatibility
-      if email.empty?
-        logger.error "Please add your tarsnap email to #{config}"
-        Kernel.abort "Please add your tarsnap email to #{config}"
+      Install.new.ensure_installation
+      if config.data[:email].empty?
+        config.log_and_abort("Please add your tarsnap email to #{config}")
       end
-      if password.empty?
-        logger.error "Please add your tarsnap password to #{config}"
-        Kernel.abort "Please add your tarsnap password to #{config}"
+      if config.data[:password].empty?
+        config.log_and_abort("Please add your tarsnap password to #{config}")
       end
     end
 
     # Fetch balance from tarsnap using
     def balance
       check_configuration
-      begin
-        page          = agent.get('https://www.tarsnap.com/account.html')
-        form          = page.form_with(:action => 'https://www.tarsnap.com/manage.cgi')
-        form.address  = email
-        form.password = password
-        panel         = agent.submit(form)
-        picodollars   = panel.parser.to_s.scan(/\$\d+\.\d+/)[0].scan(/\d+\.\d+/)[0].to_f.round(4) 
-        logger.info("Current amount of picoUSD: #{picodollars}")
-        picodollars
-      rescue SockerError => e
-        logger.error("A problem with tarsnap notification occured:")
-        logger.error(e)
+      agent         = Mechanize.new
+      page          = agent.get('https://www.tarsnap.com/account.html')
+      form          = page.form_with(:action => 'https://www.tarsnap.com/manage.cgi')
+      form.address  = config.data[:email]
+      form.password = config.data[:password]
+      panel         = agent.submit(form)
+      wrong_email_message = 'No user exists with the provided email address; please try again.'
+      wrong_password_message = 'Password is incorrect; please try again.'
+      if panel.body.include?(wrong_email_message)
+        config.log_and_abort('Password is incorrect; please try again.')
+      elsif panel.body.include?(wrong_password_message)
+        config.log_and_abort('Bad password. Please check your configuration file tarsnap password!')
       end
+      picodollars   = panel.parser.to_s.scan(/\$\d+\.\d+/)[0].scan(/\d+\.\d+/)[0].to_f.round(4) 
+      config.logger.info("Current amount of picoUSD: #{picodollars}")
+      picodollars
+    end
+
+    # private methods
+    private 
+
+    # load configuration files
+    def config 
+      Configuration.new
     end
   end
 end
