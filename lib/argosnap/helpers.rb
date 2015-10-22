@@ -7,6 +7,7 @@ module Argosnap
     def install_plist
       if configuration.gem_available?('plist')
         require 'plist'
+        time_interval = configuration.data[:seconds]
         # Gem::Platform.local.os # => osx
         user = ENV['USER']
         launch_agents = "/Users/#{user}/Library/LaunchAgents/"

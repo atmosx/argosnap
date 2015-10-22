@@ -1,7 +1,8 @@
 module Argosnap
   class Notifications
 
-    # If current balance goes bellow threshold notify me
+    # When tarsnap balance is bellow threshold notify me
+    # Runs nicely with cron
     def notify
       if config.data[:threshold] <= Fetch.new.balance
         send_email
@@ -17,7 +18,7 @@ module Argosnap
           require 'mail'
           require 'socket'
           require_relative File.expand_path("../notifications/mailer", __FILE__)
-          Mailer.new(config, logger).send 
+          Mailer.new(config.data, config.logger).send_mail
         else
           config.log_and_abort("Please install 'mail' gem by executing: '$ gem install mail'.")
         end
@@ -26,19 +27,19 @@ module Argosnap
 
     # send notification via pushover.net
     def send_pushover
-      if data[:notifications_pushover]
+      if config.data[:notifications_pushover]
         require "net/https"
         require_relative File.expand_path("../notifications/pushover", __FILE__)
-        key     = config[:pushover][:key]
-        token   = config[:pushover][:token]
-        message = "Your tarsnap account is running out of picodollars! Your current amount is #{Fetch.new.balance} picoUSD"
-        Pushover.send(token, key, message, logger)
+        key     = config.data[:pushover][:key]
+        token   = config.data[:pushover][:token]
+        message = "Your current tarsnap amount is #{Fetch.new.balance} picoUSD!"
+        Pushover.send(token, key, message, config.logger)
       end
     end
 
     # send notification to osx notifications (desktop)
     def send_osx_notification
-      if data[:Notifications_osx]
+      if config.data[:notifications_osx]
         if Gem::Platform.local.os == 'darwin'
           # load 'terminal-notifier'
           if config.gem_available?('terminal-notifier')
@@ -46,8 +47,8 @@ module Argosnap
             require_relative File.expand_path("../notifications/osxnotifications", __FILE__)
             message = "Your picoUSD amount is: #{Fetch.new.balance}"
             title  = 'argosnap'
-            subtitle 'running out of picoUSD!'
-            OSXNotify.send(message, title, subtitle)
+            subtitle = 'running out of picoUSD!'
+            OSXnotify.send(message, title, subtitle)
           else
              config.log_and_abort("You need to install 'terminal-notifier' gem!")
           end
