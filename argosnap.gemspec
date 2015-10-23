@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Argosnap::VERSION
   spec.authors       = ["Panagiotis Atmatzidis"]
   spec.email         = ["atma@convalesco.org"]
-  spec.summary       = %q{Display osx notifications when tarsnap account runs out of picodollars}
-  spec.description   = %q{A ruby script displays OSX notifications with current ballance. If the balance of picodollars falls bellow a specific threshold}
+  spec.summary       = %q{Read your tarsnap picoUSD amount in cli and display notifications when it runs out!.}
+  spec.description   = %q{A ruby script that displays tarsnap current ballance in picoUSD. The script can send notifications when the acount balance falls below the predefined threshold. Argosnap supports email, pushover and OSX notifications.}
   spec.homepage      = "https://github.com/atmosx/argosnap"
   spec.license       = "MIT"
 

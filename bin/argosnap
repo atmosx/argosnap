@@ -16,6 +16,7 @@ opt_parser = OptionParser.new do |opt|
   opt.separator  "     -n mail:      send notification via email"
   opt.separator  "     -n pushover:  send notification via pushover"
   opt.separator  "     -n osx:       display osx notification"
+  opt.separator  "     -n all:       send notifications everywhere"
   opt.separator  ""
 
   opt.on("-v","--version","display version") do |version|
@@ -64,6 +65,10 @@ begin
       Argosnap::Notifications.new.send_pushover
     elsif options[:notification] == 'osx'
       Argosnap::Notifications.new.send_osx_notification
+    elsif options[:notification] == 'osx_check'
+      Argosnap::Notifications.new.osx_check
+    elsif options[:notification] == 'all'
+      Argosnap::Notifications.new.notify
     else
       puts "You need to need to speficy notification option: 'mail' or 'pushover'"
     end

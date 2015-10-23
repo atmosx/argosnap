@@ -20,4 +20,4 @@ else
 fi
 
 # Executable now should be in path
-# argosnap -p osx_check
+argosnap -n osx_check

@@ -6,7 +6,7 @@ module Argosnap
       Configuration.new
     end
 
-    attr_reader :logger, :smtpd_user, :smtpd_password, :smtpd_address, :smtpd_port, :smtpd_from, :smtpd_to, :method, :format
+    attr_reader :logger, :smtpd_user, :smtpd_password, :smtpd_address, :smtpd_port, :smtpd_from, :smtpd_to, :method, :format, :balance
     def initialize(config, logger)
       @logger              = logger
       @smtpd_user          = config[:smtp][:smtpd_user]
@@ -17,6 +17,7 @@ module Argosnap
       @smtpd_to            = config[:smtp][:smtpd_to]
       @method              = config[:smtp][:email_delivery_method]
       @format              = config[:smtp][:format]
+      @balance             = Fetch.new.balance.to_s
     end
 
     def ensure_mail_configuration
@@ -26,6 +27,29 @@ module Argosnap
         config.log_and_abort("There is no 'smtpd_to' in #{config}. Please check your configuration file.")
       end
     end
+
+    def text_message(amount)
+      message = <<EOF
+
+Hello
+
+Your tarsnap account is running out of funds. Your current amount of picoUSD is #{amount}.
+
+This automated email message was sent by argosnap. Please do not reply to this email.
+
+Have a nice day!
+
+argosnap
+--
+
+Argosnap: Receive notifications when your tarsnap account is running out of picoUSD!
+URL:      https://github.com/atmosx/argosnap
+
+EOF
+
+      message
+    end
+
 
     # send email. HTML format is the default.
     def send_mail
@@ -39,19 +63,22 @@ module Argosnap
       # configure mail options
       mail[:from]    =  smtpd_from
       mail[:to]      =  smtpd_to
-      mail[:subject] = "ARGOSNAP: tarsnap notification!"
+      mail[:subject] = "ARGOSNAP: your tarsnap balance."
 
       # configure mail format: Use HTML if the user wants it, otherwise default to 'txt'
       if format == 'html'
         if config.gem_available?('haml')
           require 'haml'
           mail['content-type'] = 'text/html; charset=UTF-8'
-          mail[:body] = Haml::Engine.new(File.read(File.expand_path('../../../../files/mail.body.haml', __FILE__))).render
+          # convert HAML to HTML
+          Haml::Engine.new(File.read(File.expand_path('../../../../files/mail.body.haml', __FILE__))).def_method(balance, :render)
+          mail[:body] = balance.render
         else
-          config.log_and_abort("Please install haml gem to receive HTML emails: '$ gem install haml'")
+          log.error("Please install haml gem to receive HTML emails: '$ gem install haml'")
+          mail[:body] = text_message(balance)
         end
       else
-        mail[:body] =  File.read(File.expand_path('../../../../files/mail.body.txt', __FILE__))
+        mail[:body] =  text_message(balance)
       end
 
       # SMTPd configuration. Defaults to local 'sendmail'

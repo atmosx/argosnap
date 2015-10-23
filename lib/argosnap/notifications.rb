@@ -2,11 +2,18 @@ module Argosnap
   class Notifications
 
     # When tarsnap balance is bellow threshold notify me
-    # Runs nicely with cron
+    # Method is chosen based on threshold
     def notify
-      if config.data[:threshold] <= Fetch.new.balance
-        send_email
+      if config.data[:threshold] >= Fetch.new.balance
+        send_mail
         send_pushover
+        send_osx_notification
+      end
+    end
+
+    # Use with plist file
+    def osx_check
+      if config.data[:threshold] >= Fetch.new.balance
         send_osx_notification
       end
     end

@@ -1,0 +1,24 @@
+%p Hello
+%p
+  Your
+  %a{:href => "https://www.tarsnap.com/"} tarsnap account
+  is running out of funds.
+  
+  Your current amount of picoUSD is
+  = succeed "." do
+    %strong #{self.to_s}
+
+%p
+  Have a nice day!
+
+%p
+  argosnap
+
+\--
+
+%p
+  %strong Argosnap: 
+  Receive notifications when your tarsnap account is running out of picoUSD!
+%p
+  %strong URL:
+  %a{:href => "https://github.com/atmosx/argosnap"} https://github.com/atmosx/argosnap
