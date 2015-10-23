@@ -1,8 +1,6 @@
 # Argosnap
 Argosnap is a ruby script that displays your current [tarsnap](http://www.tarsnap.com/) ballance in [picoUSD](http://www.tarsnap.com/picoUSD-why.html). The script can send notifications when the account balance falls below the predefined threshold. Argosnap supports email, [pushover](https://pushover.net/) and [OSX notifications](https://support.apple.com/en-us/HT204079).
 
-<iframe width="420" height="315" src="https://www.youtube.com/embed/pm5dV607Mnw" frameborder="0" allowfullscreen></iframe>
-
 # Installation
 
 ## Linux, *BSD and MacOSX
