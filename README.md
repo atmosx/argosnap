@@ -46,7 +46,14 @@ Argosnap will create a configuration file. You need to adjust the settings accor
       :key: <my-hash-key>
       :token: <app-token-key>
 
-You need to enable the notifications you are going to use. For example is you plan to use email notifications, you must enable them in your config like `notifications_email: true` and adjust the SMTPd settings accordingly. For more info see 'notifications'.
+You need to enable the notifications you are going to use. For example is you plan to use email notifications, you must enable them in your config like `notifications_email: true` and adjust the SMTPd settings accordingly. 
+
+For more detailed info read [notifications](https://github.com/atmosx/argosnap/wiki/notifications).
+
+
+# License
+
+MIT, see [License.txt](https://github.com/atmosx/argosnap/blob/master/LICENSE.txt) for details.
 
 # Contributing
 
