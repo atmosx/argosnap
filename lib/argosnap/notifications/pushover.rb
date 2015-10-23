@@ -1,6 +1,6 @@
 # pushover.net module
 module Pushover
-  def self.send(token, user, message, log)
+  def self.send(token, user, message, log, amount)
     begin
       # be nice to Pushover API
       sleep(5)
@@ -18,6 +18,7 @@ module Pushover
         status = http.request(req).code
         if status == '200'
           log.info('Notification sent via Pushover!')
+          log.info("Current amount of picoUSD: #{amount}")
         elsif (400...500).to_a.include?(status)
           log.error("Please revise your Pushover credentials. API request failed.")
         else

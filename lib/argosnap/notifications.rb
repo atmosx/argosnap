@@ -39,8 +39,9 @@ module Argosnap
         require_relative File.expand_path("../notifications/pushover", __FILE__)
         key     = config.data[:pushover][:key]
         token   = config.data[:pushover][:token]
-        message = "Your current tarsnap amount is #{Fetch.new.balance} picoUSD!"
-        Pushover.send(token, key, message, config.logger)
+        amount = Fetch.new.balance
+        message = "Your current tarsnap amount is #{amount} picoUSD!"
+        Pushover.send(token, key, message, config.logger, amount)
       end
     end
 

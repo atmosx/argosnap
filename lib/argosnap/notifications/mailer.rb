@@ -93,6 +93,8 @@ EOF
 
       # dispatch email
       mail.deliver
+      logger.info("Argosnap sent an email to #{smtpd_to}!")
+      logger.info("Current amount in picoUSD: #{balance}")
     end
 
   end
