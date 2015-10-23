@@ -3,10 +3,18 @@ Argosnap is a ruby script that displays your current [tarsnap](http://www.tarsna
 
 # Installation
 
-Install the gem via rubygems:
+## Linux, *BSD and MacOSX
+In order to run `argosnap` you need only the [mechanize](https://github.com/sparklemotion/mechanize) gem. If you want to use receive [HTML](https://en.wikipedia.org/wiki/HTML) email notifications you are going to need the `haml` as well and `mail` gem. In case you want TXT email, you are going to need only the `mail` gem.
 
-    $ gem install argosnap plist mechanize terminal-notifier
+Install the gems via rubygems:
 
+    $ gem install mail mechanize haml argosnap
+
+## MacOSX Launchd
+If you want to use OSX notifications, you need to instal `plist` and `terminal-notifier` too. To install the gems type:
+    
+    $ gem install mail mechanize haml plist terminal-notifier argosnap
+    
 # Configure
 
 Run the following command for the script to create a configuration file like: 
@@ -16,37 +24,27 @@ Run the following command for the script to create a configuration file like:
 You'll see the location of the newly created configuration file on your terminal. Then you need to configure the `config.yml` file which looks like this:
     
     ---
-    :email: sample@email.com
-    :password: p4sw0rd3
+    :email: tarsnap_email@domain.net
+    :password: tarsnap_password
     :threshold: 10
-    :seconds: 7200
+    :seconds: 86400
+    :notifications_osx: false
+    :notifications_email: true
+    :smtp:
+      :email_delivery_method: smtp
+      :smtpd_user: my_smtp_user
+      :smtpd_password: my_smtp_password
+      :smtpd_address: smtp.domain.net
+  :smtpd_port: 465
+  :smtpd_from: no-reply@domain.net
+  :smtpd_to: user@domain.net
+  :format: txt
+:notifications_pushover: false
+:pushover:
+  :key: <my-hash-key>
+  :token: <app-token-key>
 
-Just put your tarsnap login credentials. You can omit the other two variables if you are not using an OSX system. To view your account use the command:
-
-    $ argosnap -p
-
-
-# Configure Launchd under MacOSX
-
-In the `config.yml` adjust the `threshold` and `seconds` options as you see fit. Threshold is the amount of *picodollars* bellow which you'd like to start seeing notifications and the `seconds` consists of the time window. Then type:
-
-    $ argosnap -i cron
-
-Now just start the installed `.plist` file following instruction you'll see on the screen and you're done.
-
-# Options
-
-To run an osx notification use the command:
-
-    $ argosnap -p osx
-    Current balance (picodollars): 4.8812
-
-To get the amount of picodollars as an integer type:
-
-    $ argosnap -p clean
-    4.8812
-
-That's all :-)
+TODO
 
 # Contributing
 
