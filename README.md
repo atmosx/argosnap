@@ -1,6 +1,5 @@
 # Argosnap
-
-This gem allows you to displays your current amount of picodollars along with [OSX notifications](http://support.apple.com/kb/ht5362)  when your [tarsnap account](http://www.tarsnap.com/) falls bellow a predefined threshold of [picodollars](http://www.tarsnap.com/picoUSD-why.html).
+Argosnap is a ruby script that displays your [tarsnap](http://www.tarsnap.com/) current ballance in [picoUSD]((http://www.tarsnap.com/picoUSD-why.html). The script can send notifications when the account balance falls below the predefined threshold. Argosnap supports email, [pushover](https://pushover.net/) and [OSX notifications](https://support.apple.com/en-us/HT204079).
 
 # Installation
 
