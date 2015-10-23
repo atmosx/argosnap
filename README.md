@@ -15,13 +15,15 @@ If you want to use OSX notifications, you need to instal `plist` and `terminal-n
     
     $ gem install mail mechanize haml plist terminal-notifier argosnap
     
-# Configure
+# Settings
 
-Run the following command for the script to create a configuration file like: 
+## General Setup
+
+After successful installation, run the following command: 
 
     $ argosnap -i config
 
-You'll see the location of the newly created configuration file on your terminal. Then you need to configure the `config.yml` file which looks like this:
+Argosnap will create a configuration file. You need to adjust the settings accordingly. The configuration `$HOME/.argosnap/config.yml` looks like this:
     
     ---
     :email: tarsnap_email@domain.net
@@ -35,16 +37,16 @@ You'll see the location of the newly created configuration file on your terminal
       :smtpd_user: my_smtp_user
       :smtpd_password: my_smtp_password
       :smtpd_address: smtp.domain.net
-  :smtpd_port: 465
-  :smtpd_from: no-reply@domain.net
-  :smtpd_to: user@domain.net
-  :format: txt
-:notifications_pushover: false
-:pushover:
-  :key: <my-hash-key>
-  :token: <app-token-key>
+      :smtpd_port: 465
+      :smtpd_from: no-reply@domain.net
+      :smtpd_to: user@domain.net
+      :format: txt
+    :notifications_pushover: false
+    :pushover:
+      :key: <my-hash-key>
+      :token: <app-token-key>
 
-TODO
+You need to enable the notifications you are going to use. For example is you plan to use email notifications, you must enable them in your config like `notifications_email: true` and adjust the SMTPd settings accordingly. For more info see 'notifications'.
 
 # Contributing
 
