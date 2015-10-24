@@ -9,22 +9,17 @@ opt_parser = OptionParser.new do |opt|
   opt.separator  ""
   opt.separator  "     -v:           dislay version"
   opt.separator  "     -i config:    install configuration files"
-  opt.separator  "     -i cron:      display sample cron entry"
   opt.separator  "     -i plist:     install plist file for OSX"
   opt.separator  "     -p:           prints the current amount in picoUSD"
   opt.separator  "     -p clean:     prints only the picollars (float rounded in 4 decimals), to use in cli"
   opt.separator  "     -n mail:      send notification via email"
   opt.separator  "     -n pushover:  send notification via pushover"
   opt.separator  "     -n osx:       display osx notification"
-  opt.separator  "     -n all:       send notifications everywhere"
+  opt.separator  "     -n notify:    send notifications everywhere"
   opt.separator  ""
 
   opt.on("-v","--version","display version") do |version|
     options[:version] = version
-  end
-
-  opt.on("-c","--cron","run notifications - to use with cron") do |version|
-    options[:cron] = cron
   end
 
   opt.on("-i","--install [OPTION]", "install configuration files") do |install|
@@ -53,8 +48,6 @@ begin
   elsif options[:install]
     if options[:install] == 'config'
       Argosnap::Install.new.install
-    elsif options[:install] == 'cron'
-      Argosnap::Install.new.cron_entry
     elsif options[:install] == 'plist'
       Argosnap::Helpers.new.install_plist
     end
@@ -67,7 +60,7 @@ begin
       Argosnap::Notifications.new.send_osx_notification
     elsif options[:notification] == 'osx_check'
       Argosnap::Notifications.new.osx_check
-    elsif options[:notification] == 'all'
+    elsif options[:notification] == 'notify'
       Argosnap::Notifications.new.notify
     else
       puts "You need to need to speficy notification option: 'mail' or 'pushover'"

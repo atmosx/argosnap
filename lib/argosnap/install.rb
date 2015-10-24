@@ -23,7 +23,7 @@ module Argosnap
             notifications_osx: false,
             notifications_email: false,
             smtp: {
-              email_delivery_method: 'smtp', 
+              email_delivery_method: 'sendmail', 
               smtpd_user: 'username',
               smtpd_password: 'password',
               smtpd_address: "gmail.google.com", 
