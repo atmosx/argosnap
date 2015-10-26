@@ -5,6 +5,7 @@ module Argosnap
 
     # Creates launchd script with user's variables
     def install_plist
+      Install.new.ensure_installation
       if configuration.gem_available?('plist')
         require 'plist'
         time_interval = configuration.data[:seconds]
