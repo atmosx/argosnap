@@ -28,14 +28,13 @@
         </ul>
       </header>
       <section>
-        <h1>
-<a id="argosnap" class="anchor" href="#argosnap" aria-hidden="true"><span class="octicon octicon-link"></span></a>Argosnap</h1>
+        <p><strong>Argosnap</strong> is a <a href="https://www.tarsnap.com/">tarsnap</a> utility designed that sends notifications when your account balance falls below a predefined threshold. Currently the following notifications methods are supported:</p>
 
-<p>Argosnap is a tarsnap companion that displays your current <a href="http://www.tarsnap.com/">tarsnap</a> balance in <a href="http://www.tarsnap.com/picoUSD-why.html">picoUSD</a> and sends notifications when the account balance falls below the predefined threshold. </p>
-
-<p>Argosnap supports email, <a href="https://pushover.net/">pushover</a> and <a href="https://support.apple.com/en-us/HT204079">OSX notifications</a>.</p>
-
-<p>Tarsnap by default will send two email notifications before deleting your account. Argosnap acts as an extra layer to avoid bad surprises.</p>
+<ul>
+<li><a href="https://pushover.net/">Pushover  notifications.</a></li>
+<li>Email notifications</li>
+<li><a href="https://support.apple.com/en-us/HT204079">OSX notifications</a></li>
+</ul>
 
 <h1>
 <a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h1>
@@ -43,33 +42,20 @@
 <h2>
 <a id="linux-bsd-and-macosx" class="anchor" href="#linux-bsd-and-macosx" aria-hidden="true"><span class="octicon octicon-link"></span></a>Linux, *BSD and MacOSX</h2>
 
-<p>To run <code>argosnap</code> you need the <a href="https://github.com/sparklemotion/mechanize">mechanize</a> gem. If you want to receive email notifications, you need to install the <code>mail</code> gem. By default <code>argosnap</code> will send you text-based emails. If you want to receive <a href="https://en.wikipedia.org/wiki/HTML">HTML</a> email notifications you are going to need <code>haml</code> and <code>mail</code> gems. </p>
-
-<p>Install via rubygems:</p>
+<p>The main dependency is <a href="https://github.com/sparklemotion/mechanize">mechanize</a>. Install the gems via rubygems:</p>
 
 <pre><code>$ gem install mail mechanize argosnap
 </code></pre>
 
-<h2>
-<a id="macosx-launchd" class="anchor" href="#macosx-launchd" aria-hidden="true"><span class="octicon octicon-link"></span></a>MacOSX Launchd</h2>
-
-<p>If you want to use OSX notifications, you need to instal <code>plist</code> and <code>terminal-notifier</code>. To install the gems type:</p>
-
-<pre><code>$ gem install mechanize plist terminal-notifier argosnap
-</code></pre>
-
 <h1>
-<a id="settings" class="anchor" href="#settings" aria-hidden="true"><span class="octicon octicon-link"></span></a>Settings</h1>
+<a id="setup" class="anchor" href="#setup" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setup</h1>
 
-<h2>
-<a id="general-setup" class="anchor" href="#general-setup" aria-hidden="true"><span class="octicon octicon-link"></span></a>General Setup</h2>
-
-<p>After successful installation, run the following command: </p>
+<p>Run <code>argosnap</code> to create the configuration files: </p>
 
 <pre><code>$ argosnap -i config
 </code></pre>
 
-<p>Argosnap will create a configuration file. You need to adjust the settings accordingly. The configuration <code>$HOME/.argosnap/config.yml</code> looks like this:</p>
+<p>You need to edit the settings accordingly. The configuration file is located at <code>$HOME/.argosnap/config.yml</code> and looks like this:</p>
 
 <pre><code>---
 :email: tarsnap_email@domain.net
@@ -77,7 +63,7 @@
 :threshold: 10
 :seconds: 86400
 :notifications_osx: false
-:notifications_email: true
+:notifications_email: false
 :smtp:
   :email_delivery_method: smtp
   :smtpd_user: my_smtp_user
@@ -87,15 +73,44 @@
   :smtpd_from: no-reply@domain.net
   :smtpd_to: user@domain.net
   :format: txt
-:notifications_pushover: false
+:notifications_pushover: true
 :pushover:
   :key: &lt;my-hash-key&gt;
   :token: &lt;app-token-key&gt;
 </code></pre>
 
-<p>Notifications must be enabled. For example is you plan to use email notifications, you must enable them in your configuration file (e.g. <code>notifications_email: true</code>) and adjust the SMTP settings accordingly. </p>
+<p>You need to enable notifications to use them. See <a href="https://github.com/atmosx/argosnap/wiki">the wiki</a> for details on how to setup notifications.</p>
 
-<p>For more detailed info the wiki page <a href="https://github.com/atmosx/argosnap/wiki/notifications">notifications</a>.</p>
+<h1>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h1>
+
+<p>Argosnap usage is straight forward:</p>
+
+<pre><code>$ argosnap -h
+argosnap 0.0.4.1 ( https://github.com/atmosx/argosnap/ )
+Usage: argosnap [OPTIONS]
+
+ -v:           dislay version
+ -i config:    install configuration files
+ -i plist:     install plist file for OSX
+ -p:           prints the current amount in picoUSD
+ -p clean:     prints only the picollars (float rounded in 4 decimals), to use in cli
+ -n mail:      send notification via email
+ -n pushover:  send notification via pushover
+ -n osx:       display osx notification
+ -n notify:    send notifications everywhere
+
+-v, --version                    display version
+-i, --install [OPTION]           install configuration files
+-p, --print [OPTION]             fetch current amount in picoUSD
+-n, --notification [OPTION]      send notification via email
+-h, --help                       help
+
+$ argosnap -p
+Current picoUSD balance: 4.287
+$ argosnap -p clean
+4.287
+</code></pre>
 
 <h1>
 <a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h1>
