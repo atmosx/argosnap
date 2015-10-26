@@ -42,7 +42,7 @@ module Argosnap
           puts "Configuration file created! To setup argosnap: "
           puts "1. Edit the configuration file: #{configuration.files[:config]}"
           puts "2. Run argosnap by typing in the terminal 'argosnap -p' to fetch current balance"
-          puts "3. To configure notifications see: <link>"
+          puts "3. To configure notifications see: https://github.com/atmosx/argosnap/wiki"
           puts ""
 
         end
