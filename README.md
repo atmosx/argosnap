@@ -41,7 +41,7 @@ You need to edit the settings accordingly. The configuration file is located at 
       :key: <my-hash-key>
       :token: <app-token-key>
 
-You need to enable notifications to use them. See [notifications](https://github.com/atmosx/argosnap/wiki/notifications) for details.
+You need to enable notifications to use them. See [the wiki](https://github.com/atmosx/argosnap/wiki) for details on how to setup notifications.
 
 # Usage
 Argosnap usage is straight forward:
