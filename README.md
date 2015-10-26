@@ -4,16 +4,18 @@ Argosnap is a ruby script that displays your current [tarsnap](http://www.tarsna
 # Installation
 
 ## Linux, *BSD and MacOSX
-In order to run `argosnap` you need only the [mechanize](https://github.com/sparklemotion/mechanize) gem. If you want to use receive [HTML](https://en.wikipedia.org/wiki/HTML) email notifications you are going to need the `haml` as well and `mail` gem. In case you want TXT email, you are going to need only the `mail` gem.
+To run `argosnap` you need only the [mechanize](https://github.com/sparklemotion/mechanize) gem. If you want to receive email notifications, you need to install the `mail` gem. By default `argosnap` will send you 
+
+[HTML](https://en.wikipedia.org/wiki/HTML) email notifications you are going to need `haml` and `mail` gems. 
 
 Install the gems via rubygems:
 
-    $ gem install mail mechanize haml argosnap
+    $ gem install mail mechanize argosnap
 
 ## MacOSX Launchd
-If you want to use OSX notifications, you need to instal `plist` and `terminal-notifier` too. To install the gems type:
+If you want to use OSX notifications, you need to instal `plist` and `terminal-notifier`. To install the gems type:
     
-    $ gem install mail mechanize haml plist terminal-notifier argosnap
+    $ gem install mechanize plist terminal-notifier argosnap
     
 # Settings
 
@@ -46,14 +48,13 @@ Argosnap will create a configuration file. You need to adjust the settings accor
       :key: <my-hash-key>
       :token: <app-token-key>
 
-You need to enable the notifications you are going to use. For example is you plan to use email notifications, you must enable them in your config like `notifications_email: true` and adjust the SMTPd settings accordingly. 
+Notifications must be enabled. For example is you plan to use email notifications, you must enable them in your configuration file, (e.g. `notifications_email: true`) and adjust the SMTP settings accordingly. 
 
-For more detailed info read [notifications](https://github.com/atmosx/argosnap/wiki/notifications).
-
+For more detailed info the wiki page [notifications](https://github.com/atmosx/argosnap/wiki/notifications).
 
 # License
 
-MIT, see [License.txt](https://github.com/atmosx/argosnap/blob/master/LICENSE.txt) for details.
+See [License.txt](https://github.com/atmosx/argosnap/blob/master/LICENSE.txt) for details.
 
 # Contributing
 
