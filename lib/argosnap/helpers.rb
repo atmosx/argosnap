@@ -1,3 +1,4 @@
+# main module
 module Argosnap
 
   # Helper Class

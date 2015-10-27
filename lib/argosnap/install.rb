@@ -1,3 +1,4 @@
+# main module
 require 'fileutils'
 
 module Argosnap

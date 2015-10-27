@@ -1,3 +1,4 @@
+# main module
 module Argosnap
 
   # This class handles the available notifications

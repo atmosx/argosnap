@@ -1,9 +1,11 @@
 require 'yaml'
 require 'logger'
 
+# main module
 module Argosnap
+
+  # Handle configuration files and create 'logger' object
   class Configuration
-    # configuration files
     def files
       {
         config: "#{Dir.home}/.argosnap/config.yml", 
@@ -12,17 +14,16 @@ module Argosnap
       }
     end
 
-    # logger object
+    # Create the logger object
     def logger
       Logger.new(files[:logfile], 10, 1024000)
     end
 
-    # Config data in hash 
+    # Load configuration data as a hash 
     def data
       YAML::load_file(files[:config])
     end
 
-    # Check if gem is available
     def gem_available?(name)
          Gem::Specification.find_by_name(name)
     rescue Gem::LoadError
@@ -31,7 +32,6 @@ module Argosnap
          Gem.available?(name)
     end
 
-    # Log and Abort!
     def log_and_abort(msg)
       logger.error(msg)
       Kernel.abort(msg)
