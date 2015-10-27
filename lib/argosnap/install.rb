@@ -2,6 +2,8 @@ require 'fileutils'
 
 module Argosnap
 
+  # Install configuration and log files on the system.
+  # All program files to go '$HOME/.argosnap'
   class Install
 
     # Install configuration files in the system

@@ -1,4 +1,6 @@
 module Argosnap
+
+  # This class handles the available notifications
   class Notifications
 
     # When tarsnap balance is bellow threshold notify me
@@ -11,14 +13,12 @@ module Argosnap
       end
     end
 
-    # Use with plist file
-    def osx_check
+    def osx_check_and_notify
       if config.data[:threshold] >= Fetch.new.balance
         send_osx_notification
       end
     end
 
-    # send notification via email
     def send_mail
       if config.data[:notifications_email]
         if config.gem_available?('mail')
@@ -32,8 +32,7 @@ module Argosnap
       end
     end
 
-    # send notification via pushover.net
-    def send_pushover
+    def send_pushover_notification
       if config.data[:notifications_pushover]
         require "net/https"
         require_relative File.expand_path("../notifications/pushover", __FILE__)

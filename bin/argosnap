@@ -55,11 +55,11 @@ begin
     if options[:notification] == 'mail'
       Argosnap::Notifications.new.send_mail
     elsif options[:notification] == 'pushover'
-      Argosnap::Notifications.new.send_pushover
+      Argosnap::Notifications.new.send_pushover_notification
     elsif options[:notification] == 'osx'
       Argosnap::Notifications.new.send_osx_notification
     elsif options[:notification] == 'osx_check'
-      Argosnap::Notifications.new.osx_check
+      Argosnap::Notifications.new.osx_check_and_notify
     elsif options[:notification] == 'notify'
       Argosnap::Notifications.new.notify
     else

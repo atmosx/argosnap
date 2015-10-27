@@ -1,7 +1,8 @@
 require 'mechanize'
 
 module Argosnap
-  # Given a username and a password, fetch balance from https://www.tarsnap.com
+
+  # Given username and a password, fetch balance from www.tarsnap.com
   class Fetch
 
     # Elementary configuration file check

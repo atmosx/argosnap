@@ -1,4 +1,6 @@
 module Argosnap
+
+  # Send email notification to the user
   class Mailer
 
     # load configuration files
