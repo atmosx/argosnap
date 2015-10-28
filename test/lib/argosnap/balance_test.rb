@@ -6,11 +6,11 @@ describe Argosnap do
     @threshold = Argosnap::Configuration.new.data[:threshold]
   end
 
-  it "balance is a float" do
+  it 'balance is a float' do
     @balance.must_be_kind_of Float
   end
 
-  it "threshold is a float" do
+  it 'threshold is a float' do
     @threshold.must_be_kind_of (Fixnum || Float)
   end
 

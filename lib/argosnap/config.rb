@@ -6,6 +6,8 @@ module Argosnap
 
   # Handle configuration files and create 'logger' object
   class Configuration
+
+    # Configuration files hash
     def files
       {
         config: "#{Dir.home}/.argosnap/config.yml", 
