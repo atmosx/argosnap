@@ -1,0 +1,658 @@
+/*
+* Skeleton V2.0.4
+* Copyright 2014, Dave Gamache
+* www.getskeleton.com
+* Free to use under the MIT license.
+* http://www.opensource.org/licenses/mit-license.php
+* 12/29/2014
+*/
+
+
+/* Table of contents
+––––––––––––––––––––––––––––––––––––––––––––––––––
+- Grid
+- Base Styles
+- Typography
+- Links
+- Buttons
+- Forms
+- Lists
+- Code
+- Tables
+- Spacing
+- Utilities
+- Clearing
+- Media Queries
+*/
+
+
+/* Grid
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+.container {
+  position: relative;
+  max-width: 960px;
+  margin: 0 auto;
+  box-sizing: border-box; }
+.column,
+.columns {
+  width: 100%;
+  float: left;
+  box-sizing: border-box; }
+
+/* For devices larger than 400px */
+@media (min-width: 400px) {
+  .container {
+    /* width: 85%;*/
+    padding: 0; }
+}
+
+/* For devices larger than 550px */
+@media (min-width: 550px) {
+  .container {
+    width: 80%; }
+  .column,
+  .columns {
+    margin-left: 4%; }
+  .column:first-child,
+  .columns:first-child {
+    margin-left: 0; }
+
+  .one.column,
+  .one.columns                    { width: 4.66666666667%; }
+  .two.columns                    { width: 13.3333333333%; }
+  .three.columns                  { width: 22%;            }
+  .four.columns                   { width: 30.6666666667%; }
+  .five.columns                   { width: 39.3333333333%; }
+  .six.columns                    { width: 48%;            }
+  .seven.columns                  { width: 56.6666666667%; }
+  .eight.columns                  { width: 65.3333333333%; }
+  .nine.columns                   { width: 74.0%;          }
+  .ten.columns                    { width: 82.6666666667%; }
+  .eleven.columns                 { width: 91.3333333333%; }
+  .twelve.columns                 { width: 100%; margin-left: 0; }
+
+  .one-third.column               { width: 30.6666666667%; }
+  .two-thirds.column              { width: 65.3333333333%; }
+
+  .one-half.column                { width: 48%; }
+
+  /* Offsets */
+  .offset-by-one.column,
+  .offset-by-one.columns          { margin-left: 8.66666666667%; }
+  .offset-by-two.column,
+  .offset-by-two.columns          { margin-left: 17.3333333333%; }
+  .offset-by-three.column,
+  .offset-by-three.columns        { margin-left: 26%;            }
+  .offset-by-four.column,
+  .offset-by-four.columns         { margin-left: 34.6666666667%; }
+  .offset-by-five.column,
+  .offset-by-five.columns         { margin-left: 43.3333333333%; }
+  .offset-by-six.column,
+  .offset-by-six.columns          { margin-left: 52%;            }
+  .offset-by-seven.column,
+  .offset-by-seven.columns        { margin-left: 60.6666666667%; }
+  .offset-by-eight.column,
+  .offset-by-eight.columns        { margin-left: 69.3333333333%; }
+  .offset-by-nine.column,
+  .offset-by-nine.columns         { margin-left: 78.0%;          }
+  .offset-by-ten.column,
+  .offset-by-ten.columns          { margin-left: 86.6666666667%; }
+  .offset-by-eleven.column,
+  .offset-by-eleven.columns       { margin-left: 95.3333333333%; }
+
+  .offset-by-one-third.column,
+  .offset-by-one-third.columns    { margin-left: 34.6666666667%; }
+  .offset-by-two-thirds.column,
+  .offset-by-two-thirds.columns   { margin-left: 69.3333333333%; }
+
+  .offset-by-one-half.column,
+  .offset-by-one-half.columns     { margin-left: 52%; }
+}
+
+
+/* Base Styles
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+/* NOTE
+html is set to 62.5% so that all the REM measurements throughout Skeleton
+are based on 10px sizing. So basically 1.5rem = 15px :) */
+html {
+  font-size: 62.5%; 
+}
+
+body {
+  padding: 3px;
+  font-size: 1.7em; /* currently ems cause chrome bug misinterpreting rems on body element */
+  line-height: 1.6;
+  font-weight: 400;
+  font-family: 'Merriweather', serif;
+  color: #5E5E5E; }
+
+/* Typography
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Open Sans Condensed', Arial, serif; 
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-weight: 400; 
+}
+
+h1 { 
+  font-size: 3.0rem; 
+}
+
+h1 { font-size: 3.0rem; }
+h2 { font-size: 2.5rem; }
+h3 { font-size: 2.1rem; }
+h4 { font-size: 2.0rem; }
+h5 { font-size: 1.8rem; }
+h6 { font-size: 1.5rem; }
+
+#frontblog {
+  width: auto;
+}
+
+/* blog post */
+h1.title {
+  font-size: 4.0rem;
+  color: black;
+}
+
+h1.section, h1.head, p.subtitle, p.revision, p.quote, p.meta_inline {
+  font-family: "Open Sans Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 6rem;
+  color: #5E5E5E;
+  margin-bottom: 1%;
+}
+
+h1.section, p.meta_inline {
+  letter-spacing: 1.2px;
+  font-size: 2rem;
+  color: #8A8A8B;
+}
+
+p.hpost {
+  font-weight: 400;
+  font-size: 1.7rem;
+  letter-spacing: 1px;
+  margin: 2px;
+}
+
+p.meta {
+  padding-left: 20px;
+  font-size: 1.5rem;
+  margin: 3px;
+}
+
+p.meta_inline {
+  font-size: 1.5rem;
+  margin: 3px;
+  display: inline-block
+}
+
+p.quote {
+  margin-top: 12%;
+  text-align: right;
+  font-size: 1.8rem;
+  color: black;
+}
+
+p.subtitle, p.revision {
+  text-decoration: italic;
+  margin-left: 3px;
+  font-size: 1.5rem;
+}
+
+p.subtitle {
+  text-align: right;
+}
+p.revision {
+  text-align: left;
+}
+
+.post {
+  margin: 10px;
+}
+
+p.profile {
+  font-weight: 400;
+  font-family: 'Merriweather', serif;
+  color: #5E5E5E;
+}
+
+.footnotes {
+  font-size: 80%;
+}
+
+#post {
+  font-weight: 400;
+  font-size: 1.1em;
+}
+
+#page {
+  text-align: justify;
+  font-family: 'Helvetica Neue', serif;
+}
+
+#postel {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  font-size: 1.1em;
+}
+
+#footer {
+  font-family: "Open Sans Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 1.6rem;
+  text-align: center;
+}
+
+/* Larger than phablet */
+@media (min-width: 550px) {
+  h1 { font-size: 3.0rem;}
+  h2 { font-size: 2.5rem;}
+  h3 { font-size: 2.1rem;}
+  h4 { font-size: 2.0rem;}
+  h5 { font-size: 1.8rem;}
+  h6 { font-size: 1.5rem;}
+}
+
+p {
+  margin-top: 0; }
+
+/* Images */
+img {
+  padding:1px;
+  border:2px solid #021a40;
+}
+
+img.profile {
+  float: right;
+  padding: 0px;
+  border: none;
+}
+
+/* share */
+ul.share-buttons{
+  list-style: none;
+  padding: 0;
+}
+
+ul.share-buttons li{
+  display: inline;
+}
+.share_buttons {
+  padding-left: 20px;
+  margin-left: 3px;
+}
+
+
+/* Links
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+a {
+  color: #1EAEDB; }
+a:hover {
+  color: blue; }
+
+a.title {color: #5E5E5E; text-decoration: none; }
+a.title:hover {color: grey;}
+
+a.inline {color: #5E5E5E; text-decoration: none; display: inline-block}
+a.inline:hover {color: grey;}
+
+  
+
+/* Buttons
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.button,
+button,
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+  display: inline-block;
+  height: 38px;
+  padding: 0 30px;
+  color: #555;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 38px;
+  letter-spacing: .1rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  background-color: transparent;
+  border-radius: 4px;
+  border: 1px solid #bbb;
+  cursor: pointer;
+  box-sizing: border-box; }
+.button:hover,
+button:hover,
+input[type="submit"]:hover,
+input[type="reset"]:hover,
+input[type="button"]:hover,
+.button:focus,
+button:focus,
+input[type="submit"]:focus,
+input[type="reset"]:focus,
+input[type="button"]:focus {
+  color: #333;
+  border-color: #888;
+  outline: 0; }
+.button.button-primary,
+button.button-primary,
+input[type="submit"].button-primary,
+input[type="reset"].button-primary,
+input[type="button"].button-primary {
+  color: #FFF;
+  background-color: #33C3F0;
+  border-color: #33C3F0; }
+.button.button-primary:hover,
+button.button-primary:hover,
+input[type="submit"].button-primary:hover,
+input[type="reset"].button-primary:hover,
+input[type="button"].button-primary:hover,
+.button.button-primary:focus,
+button.button-primary:focus,
+input[type="submit"].button-primary:focus,
+input[type="reset"].button-primary:focus,
+input[type="button"].button-primary:focus {
+  color: #FFF;
+  background-color: #1EAEDB;
+  border-color: #1EAEDB; }
+
+
+/* Forms
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+input[type="email"],
+input[type="number"],
+input[type="search"],
+input[type="text"],
+input[type="tel"],
+input[type="url"],
+input[type="password"],
+textarea,
+select {
+  height: 38px;
+  padding: 6px 10px; /* The 6px vertically centers text on FF, ignored by Webkit */
+  background-color: #fff;
+  border: 1px solid #D1D1D1;
+  border-radius: 4px;
+  box-shadow: none;
+  box-sizing: border-box; }
+/* Removes awkward default styles on some inputs for iOS */
+input[type="email"],
+input[type="number"],
+input[type="search"],
+input[type="text"],
+input[type="tel"],
+input[type="url"],
+input[type="password"],
+textarea {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none; }
+textarea {
+  min-height: 65px;
+  padding-top: 6px;
+  padding-bottom: 6px; }
+input[type="email"]:focus,
+input[type="number"]:focus,
+input[type="search"]:focus,
+input[type="text"]:focus,
+input[type="tel"]:focus,
+input[type="url"]:focus,
+input[type="password"]:focus,
+textarea:focus,
+select:focus {
+  border: 1px solid #33C3F0;
+  outline: 0; }
+label,
+legend {
+  display: block;
+  margin-bottom: .5rem;
+  font-weight: 600; }
+fieldset {
+  padding: 0;
+  border-width: 0; }
+input[type="checkbox"],
+input[type="radio"] {
+  display: inline; }
+label > .label-body {
+  display: inline-block;
+  margin-left: .5rem;
+  font-weight: normal; }
+
+
+/* Lists
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+ul {
+  list-style: circle inside; }
+ol {
+  list-style: decimal inside; }
+ol, ul {
+  padding-left: 0;
+  margin-top: 0; }
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+  margin: 1.5rem 0 1.5rem 3rem;
+  font-size: 90%; }
+li {
+  margin-bottom: 1rem; }
+
+
+/* Code
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+/* Code
+ * –––––––––––––––––––––––––––––––––––––––––––––––––– */
+code {
+  padding: .1rem .4rem;
+  margin: 0 .1rem;
+  font-size: 1em;
+  white-space: nowrap;
+  /* background: #F1F1F1;*/
+  background: #F7F8E5;
+  border: 2px solid #E1E1E1;
+  border-radius: 4px; 
+}
+pre > code {
+  display: block;
+  padding: 1rem 1.5rem;
+  overflow: auto;
+white-space: pre; }
+
+
+
+/* Tables
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+th,
+td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #E1E1E1; }
+th:first-child,
+td:first-child {
+  padding-left: 0; }
+th:last-child,
+td:last-child {
+  padding-right: 0; }
+
+
+/* Spacing
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+button,
+.button {
+  margin-bottom: 1rem; }
+input,
+textarea,
+select,
+fieldset {
+  margin-bottom: 1.5rem; }
+pre,
+blockquote,
+dl,
+figure,
+table,
+p,
+ul,
+ol,
+form, form.search {
+  margin-bottom: 1rem; }
+
+ form.search {
+  text-align: 'right'; 
+}
+
+blockquote{
+  display:block;
+  background: #fff;
+  padding: 15px 20px 15px 45px;
+  margin: 0 0 20px;
+  position: relative;
+
+  /*Font*/
+  font-family: Georgia, serif;
+  font-size: 16px;
+  line-height: 1.2;
+  color: #666;
+  text-align: justify;
+
+  /*Borders - (Optional)*/
+  border-left: 15px solid grey;
+  border-right: 2px solid grey;
+
+  /*Box Shadow - (Optional)*/
+  -moz-box-shadow: 2px 2px 15px #ccc;
+  -webkit-box-shadow: 2px 2px 15px #ccc;
+  box-shadow: 2px 2px 15px #ccc;
+}
+
+blockquote::before{
+  content: "\201C"; /*Unicode for Left Double Quote*/
+
+  /*Font*/
+  font-family: Georgia, serif;
+  font-size: 60px;
+  font-weight: bold;
+  color: #999;
+
+  /*Positioning*/
+  position: absolute;
+  left: 10px;
+  top:5px;
+}
+
+blockquote::after{
+  /*Reset to make sure*/
+  content: "";
+}
+
+blockquote a{
+  text-decoration: none;
+  background: #eee;
+  cursor: pointer;
+  padding: 0 3px;
+  color: #c76c0c;
+}
+
+blockquote a:hover{
+  color: #666;
+}
+
+blockquote em{
+  font-style: italic;
+}
+
+blockquote cite {
+  color: #999999;
+  font-size: 14px;
+  display: block;
+  margin-top: 5px;
+}
+ 
+blockquote cite:before {
+  content: "\2014 \2009";
+}
+
+/* Utilities
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.u-full-width {
+  width: 100%;
+  box-sizing: border-box; }
+.u-max-full-width {
+  max-width: 100%;
+  box-sizing: border-box; }
+.u-pull-right {
+  float: right; }
+.u-pull-left {
+  float: left; }
+
+
+/* Misc
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+hr {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border-width: 0;
+  border-top: 1px solid #E1E1E1; }
+
+/* Glyph, by Harry Roberts */
+
+hr.post {
+  padding: 0;
+  border: none;
+  border-top: medium double #E1E1E1;
+  color: #E1E1E1;
+  text-align: center;
+}
+hr.post:after {
+  content: "§";
+  display: inline-block;
+  position: relative;
+  top: -0.7em;
+  font-size: 1.5em;
+  padding: 0 0.25em;
+  background: white;
+}
+
+/* Clearing
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+/* Self Clearing Goodness */
+.container:after,
+.row:after,
+.u-cf {
+  content: "";
+  display: table;
+  clear: both; }
+
+
+/* Media Queries
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+/*
+Note: The best way to structure the use of media queries is to create the queries
+near the relevant code. For example, if you wanted to change the styles for buttons
+on small devices, paste the mobile query code up in the buttons section and style it
+there.
+*/
+
+span.mobileonly { 
+display: none; 
+display: inline;
+}
+
+/* Larger than mobile */
+@media (min-width: 400px) {}
+
+/* Larger than phablet (also point when grid becomes active) */
+@media (min-width: 550px) {}
+
+/* Larger than tablet */
+@media (min-width: 750px) {}
+
+/* Larger than desktop */
+@media (min-width: 1000px) {}
+
+/* Larger than Desktop HD */
+@media (min-width: 1200px) {}
