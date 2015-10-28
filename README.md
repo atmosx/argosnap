@@ -1,6 +1,6 @@
 [![PullReview stats](https://www.pullreview.com/github/atmosx/argosnap/badges/dev.svg?)](https://www.pullreview.com/github/atmosx/argosnap/reviews/dev)
 
-**Argosnap** is a [tarsnap](https://www.tarsnap.com/) utility designed to send notifications when the picoUSD balance falls below a predefined threshold. Currently the following notifications methods are supported:
+**Argosnap** is a [tarsnap](https://www.tarsnap.com/) utility designed to send notifications when the picoUSD balance falls below a predefined threshold. Currently the following notification methods are supported:
 
 * [Pushover  notifications.](https://pushover.net/)
 * Email notifications
