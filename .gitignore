@@ -1,0 +1,4 @@
+*syncthing*
+*.gem
+notes.txt
+.DS_Store

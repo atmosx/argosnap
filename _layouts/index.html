@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<title>Argosnap by atmosx</title>
+
+<link rel="stylesheet" href="{{ site.path }}stylesheets/styles.css">
+<link rel="stylesheet" href="{{ site.path }}stylesheets/github-light.css">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div class="wrapper">
+  <header>
+    <h1>Argosnap</h1>
+    <p>A notification utility for tarsnap </p>
+
+    <p class="view"><a href="https://github.com/atmosx/argosnap">View the Project on GitHub <small>atmosx/argosnap</small></a></p>
+
+
+    <ul>
+      <li><a href="https://github.com/atmosx/argosnap/zipball/master">Download <strong>ZIP File</strong></a></li>
+      <li><a href="https://github.com/atmosx/argosnap/tarball/master">Download <strong>TAR Ball</strong></a></li>
+      <li><a href="https://github.com/atmosx/argosnap">View On <strong>GitHub</strong></a></li>
+    </ul>
+  </header>
+  <section>
+    {{ content }}
+  </section>
+  <footer>
+    <p>This project is maintained by <a href="https://github.com/atmosx">atmosx</a></p>
+    <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+  </footer>
+</div>
+<script type="text/javascript">
+$(function () {
+    $('a').each(function () {
+        var ext = '.md';
+        var href = $(this).attr('href');
+        var position = href.length - ext.length;
+        if (href.substring(position) === ext)
+        $(this).attr('href', href.substring(0, position));
+        });
+    });
+</script>
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=3148321; 
+var sc_invisible=1; 
+var sc_security="c34dfdce"; 
+var scJsHost = (("https:" == document.location.protocol) ?
+    "https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+    scJsHost+
+    "statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="free hit
+      counter" href="http://statcounter.com/" target="_blank"><img
+      class="statcounter"
+      src="http://c.statcounter.com/3148321/0/c34dfdce/1/"
+      alt="free hit counter"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+
+</body>
+</html>
