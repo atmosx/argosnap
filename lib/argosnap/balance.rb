@@ -18,6 +18,7 @@ module Argosnap
       end
     end
 
+    # check for login errors
     def check_login_errors(data)
       wrong_email_message = 'No user exists with the provided email address; please try again.'
       wrong_password_message = 'Password is incorrect; please try again.'

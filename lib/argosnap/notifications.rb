@@ -45,7 +45,7 @@ module Argosnap
       end
     end
 
-    # send notification to osx notifications (desktop)
+    # Manually send notification to osx notifications (desktop)
     def send_osx_notification
       if config.data[:notifications_osx]
         if Gem::Platform.local.os == 'darwin'
