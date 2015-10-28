@@ -2,13 +2,12 @@
 layout: index
 ---
 
+
 **Argosnap** is a [tarsnap](https://www.tarsnap.com/) utility designed to send notifications when the picoUSD balance falls below a predefined threshold. Currently the following notifications methods are supported:
 
 * [Pushover  notifications.](https://pushover.net/)
 * Email notifications
 * [OSX notifications](https://support.apple.com/en-us/HT204079)
-
-<iframe src="https://www.youtube.com/embed/pm5dV607Mnw" width="100%" height="450px" id="iframe1" marginheight="0" frameborder="0" onLoad="autoResize('iframe1');"></iframe>
 
 # Installation
 
