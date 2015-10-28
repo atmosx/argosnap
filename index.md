@@ -8,7 +8,7 @@ layout: index
 * Email notifications
 * [OSX notifications](https://support.apple.com/en-us/HT204079)
 
-<iframe width="420" height="315" src="https://www.youtube.com/embed/pm5dV607Mnw" frameborder="0" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/pm5dV607Mnw" width="100%" height="200px" id="iframe1" marginheight="0" frameborder="0" onLoad="autoResize('iframe1');"></iframe>
 
 # Installation
 
