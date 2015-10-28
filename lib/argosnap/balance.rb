@@ -18,6 +18,16 @@ module Argosnap
       end
     end
 
+    def check_login_errors(data)
+      wrong_email_message = 'No user exists with the provided email address; please try again.'
+      wrong_password_message = 'Password is incorrect; please try again.'
+      if data.body.include?(wrong_email_message)
+        config.log_and_abort('Password is incorrect; please try again.')
+      elsif data.body.include?(wrong_password_message)
+        config.log_and_abort('Bad password. Please check your configuration file tarsnap password!')
+      end
+    end
+
     # Fetch balance from tarsnap using
     def balance
       check_configuration
@@ -27,13 +37,7 @@ module Argosnap
       form.address  = config.data[:email]
       form.password = config.data[:password]
       panel         = agent.submit(form)
-      wrong_email_message = 'No user exists with the provided email address; please try again.'
-      wrong_password_message = 'Password is incorrect; please try again.'
-      if panel.body.include?(wrong_email_message)
-        config.log_and_abort('Password is incorrect; please try again.')
-      elsif panel.body.include?(wrong_password_message)
-        config.log_and_abort('Bad password. Please check your configuration file tarsnap password!')
-      end
+      check_login_errors(panel)
       picodollars = panel.parser.to_s.scan(/\$\d+\.\d+/)[0].scan(/\d+\.\d+/)[0].to_f.round(4) 
       config.logger.info("Current amount of picoUSD: #{picodollars}")
       picodollars
